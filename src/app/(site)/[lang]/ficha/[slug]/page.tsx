@@ -12,6 +12,8 @@ import { SanityImage } from "@/components/SanityImage";
 import { PortableTextBasico } from "@/components/PortableTextBasico";
 import { QrDescarga } from "@/components/QrDescarga";
 import { urlFicha, generarQrDataUrl } from "@/lib/qr";
+import { JsonLd } from "@/components/JsonLd";
+import { jsonLdFicha } from "@/lib/jsonld";
 
 const TIPO_LABEL: Record<string, { es: string; en: string }> = {
   especie: { es: "Especie", en: "Species" },
@@ -78,6 +80,7 @@ export default async function FichaPage({
 
   return (
     <>
+      <JsonLd data={jsonLdFicha(f, lang)} />
       <PageHeader
         migas={[
           { label: d.nav.inicio, href: rutas(lang).inicio },

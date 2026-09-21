@@ -1,3 +1,4 @@
+import { draftMode } from "next/headers";
 import { createClient } from "next-sanity";
 import { apiVersion, dataset, projectId } from "@/sanity/env";
 
@@ -13,6 +14,13 @@ const serverClient = createClient({
   useCdn: false,
   perspective: "published",
   token: process.env.SANITY_API_READ_TOKEN,
+});
+
+/** Cliente para la vista previa de borradores (Draft Mode + Presentation). */
+const previewClient = serverClient.withConfig({
+  perspective: "previewDrafts",
+  useCdn: false,
+  stega: { studioUrl: "/studio" },
 });
 
 /**
@@ -33,8 +41,8 @@ export type Tag = (typeof TAGS)[keyof typeof TAGS];
 
 /**
  * Consulta a Sanity con caché etiquetada para revalidación a demanda.
- * Por defecto no expira por tiempo: solo se refresca cuando el webhook
- * revalida su etiqueta (o en cada build).
+ * En Draft Mode (vista previa) lee los borradores sin caché; en producción
+ * lee lo publicado y solo se refresca cuando el webhook revalida su etiqueta.
  */
 export async function sanityFetch<T>({
   query,
@@ -45,6 +53,21 @@ export async function sanityFetch<T>({
   params?: Record<string, unknown>;
   tags: Tag[];
 }): Promise<T> {
+  // draftMode() solo existe dentro de una petición. En generateStaticParams o
+  // en el sitemap (fuera de petición) lanza: ahí asumimos contenido publicado.
+  let isDraft = false;
+  try {
+    isDraft = (await draftMode()).isEnabled;
+  } catch {
+    isDraft = false;
+  }
+
+  if (isDraft) {
+    return previewClient.fetch<T>(query, params, {
+      cache: "no-store",
+    });
+  }
+
   return serverClient.fetch<T>(query, params, {
     next: { tags },
   });

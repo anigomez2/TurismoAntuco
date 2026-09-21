@@ -9,6 +9,8 @@ import type { Evento } from "@/sanity/lib/types";
 import { Container } from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
 import { EventoCard } from "@/components/EventoCard";
+import { JsonLd } from "@/components/JsonLd";
+import { jsonLdAgenda } from "@/lib/jsonld";
 
 export async function generateMetadata({
   params,
@@ -55,6 +57,7 @@ export default async function AgendaPage({
 
   return (
     <>
+      {eventos.length > 0 && <JsonLd data={jsonLdAgenda(eventos)} />}
       <PageHeader
         migas={[{ label: d.nav.inicio, href: rutas(lang).inicio }, { label: d.nav.agenda }]}
         titulo={en ? "Events calendar" : "Agenda de eventos"}

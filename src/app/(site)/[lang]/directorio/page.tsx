@@ -10,6 +10,8 @@ import { Container } from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
 import { DirectorioCliente } from "@/components/DirectorioCliente";
 import { CtaPublica } from "@/components/CtaPublica";
+import { JsonLd } from "@/components/JsonLd";
+import { jsonLdDirectorio } from "@/lib/jsonld";
 
 export async function generateMetadata({
   params,
@@ -57,6 +59,7 @@ export default async function DirectorioPage({
 
   return (
     <>
+      <JsonLd data={jsonLdDirectorio(prestadores)} />
       <PageHeader
         migas={[
           { label: d.nav.inicio, href: rutas(lang).inicio },

@@ -103,6 +103,15 @@ export const prestador = defineType({
         }).warning("Solo números, con código de país (ej.: 56912345678)."),
     }),
     defineField({
+      name: "contactoSolicitante",
+      title: "Contacto de la solicitud (uso interno)",
+      description:
+        "Se completa automáticamente cuando alguien envía el formulario “Publica tu servicio”. Sirve para contactar al prestador antes de publicar. No se muestra en el sitio.",
+      type: "string",
+      group: "basico",
+      readOnly: true,
+    }),
+    defineField({
       name: "fotos",
       title: "Fotos",
       type: "array",

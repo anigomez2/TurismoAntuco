@@ -20,6 +20,8 @@ import { PrestadorCard } from "@/components/PrestadorCard";
 import { EventoCard } from "@/components/EventoCard";
 import { AntesDeVenir } from "@/components/AntesDeVenir";
 import { SeccionPromo } from "@/components/SeccionPromo";
+import { JsonLd } from "@/components/JsonLd";
+import { jsonLdDestino } from "@/lib/jsonld";
 
 export async function generateMetadata({
   params,
@@ -65,6 +67,7 @@ export default async function InicioPage({
 
   return (
     <>
+      <JsonLd data={jsonLdDestino()} />
       <Hero lang={idioma} foto={config?.fotoPortada} />
 
       {/* Antuco en cada temporada */}

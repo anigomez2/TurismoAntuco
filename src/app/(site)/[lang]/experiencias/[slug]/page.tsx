@@ -13,6 +13,8 @@ import { ReservaPanel } from "@/components/ReservaPanel";
 import { PortableTextBasico } from "@/components/PortableTextBasico";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { IconCheck } from "@/components/Icons";
+import { JsonLd } from "@/components/JsonLd";
+import { jsonLdExperiencia } from "@/lib/jsonld";
 
 export async function generateStaticParams() {
   const slugs = await sanityFetch<{ slug: string; language?: string }[]>({
@@ -78,6 +80,7 @@ export default async function ExperienciaDetallePage({
 
   return (
     <>
+      <JsonLd data={jsonLdExperiencia(exp, lang)} />
       <PageHeader
         migas={[
           { label: d.nav.inicio, href: rutas(lang).inicio },
