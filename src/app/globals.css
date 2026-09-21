@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-fondo text-tinta;
+    font-family: var(--font-source-serif), Georgia, serif;
+  }
+
+  /* Titulares: Archivo condensado, peso alto. */
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-titulo {
+    font-family: var(--font-archivo), system-ui, sans-serif;
+    font-stretch: 87%; /* ancho condensado ~82-88% */
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: theme("colors.tinta");
+  }
+
+  /* Foco visible para navegación con teclado (accesibilidad). */
+  :focus-visible {
+    outline: 3px solid theme("colors.glaciar");
+    outline-offset: 2px;
+  }
+
+  a {
+    color: theme("colors.glaciar");
+    text-underline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Objetivo táctil mínimo de 44px (WCAG 2.1 AA). */
+  .toque {
+    @apply min-h-touch min-w-touch;
+  }
+}

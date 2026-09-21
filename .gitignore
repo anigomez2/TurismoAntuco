@@ -1,0 +1,32 @@
+# dependencias
+/node_modules
+/.pnp
+.pnp.*
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# producción
+/build
+
+# entorno (nunca subir tokens)
+.env
+.env.local
+.env*.local
+
+# sanity
+/dist
+
+# vercel
+.vercel
+
+# logs y sistema
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# typescript
+*.tsbuildinfo

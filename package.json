@@ -1,0 +1,43 @@
+{
+  "name": "turismo-antuco",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sitio web oficial de turismo de la comuna de Antuco (Biobío, Chile)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "seed": "tsx scripts/seed.ts",
+    "seed:reset": "tsx scripts/seed.ts --reset"
+  },
+  "dependencies": {
+    "@sanity/document-internationalization": "^3.3.0",
+    "@sanity/image-url": "^1.1.0",
+    "@sanity/vision": "^3.68.3",
+    "@vercel/analytics": "^1.4.1",
+    "@vercel/speed-insights": "^1.1.0",
+    "next": "15.1.6",
+    "next-sanity": "^9.8.44",
+    "qrcode": "^1.5.4",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "sanity": "^3.68.3",
+    "styled-components": "^6.1.14"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.20",
+    "dotenv": "^16.4.7",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.6",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
