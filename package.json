@@ -10,8 +10,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "seed": "tsx scripts/seed.ts",
-    "seed:reset": "tsx scripts/seed.ts --reset",
-    "accuweather:location": "tsx scripts/accuweather-location.ts"
+    "seed:reset": "tsx scripts/seed.ts --reset"
   },
   "dependencies": {
     "@sanity/document-internationalization": "^3.3.0",

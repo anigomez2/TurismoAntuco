@@ -1,5 +1,5 @@
 import type { Idioma } from "@/lib/i18n";
-import { obtenerPronostico, type DiaPronostico } from "@/lib/weather";
+import { obtenerPronostico, type CategoriaClima } from "@/lib/weather";
 import { IconSun, IconCloud, IconRain, IconSnow, IconExternal } from "@/components/Icons";
 
 /**
@@ -12,8 +12,8 @@ export async function Forecast({ lang }: { lang: Idioma }) {
 
   const t =
     lang === "en"
-      ? { titulo: "5-day forecast", nota: "Forecast for Antuco town — conditions in the park may be harsher.", rain: "rain", fuente: "Forecast by AccuWeather" }
-      : { titulo: "Pronóstico a 5 días", nota: "Pronóstico del pueblo de Antuco — en el parque las condiciones pueden ser más extremas.", rain: "lluvia", fuente: "Pronóstico por AccuWeather" };
+      ? { titulo: "5-day forecast", nota: "Forecast for Antuco town — conditions in the park may be harsher.", rain: "rain" }
+      : { titulo: "Pronóstico a 5 días", nota: "Pronóstico del pueblo de Antuco — en el parque las condiciones pueden ser más extremas.", rain: "lluvia" };
 
   return (
     <section aria-label={t.titulo} className="rounded-tarjeta border border-tinta/10 bg-white p-4 sm:p-6">
@@ -25,7 +25,7 @@ export async function Forecast({ lang }: { lang: Idioma }) {
               {nombreDia(dia.fechaISO, lang)}
             </p>
             <div className="my-2 flex justify-center text-glaciar">
-              <IconoClima icono={dia.iconoAccu} />
+              <IconoClima categoria={dia.categoria} />
             </div>
             <p className="font-titulo text-tinta">
               <span className="font-bold">{dia.maxC}°</span>{" "}
@@ -45,20 +45,18 @@ export async function Forecast({ lang }: { lang: Idioma }) {
         rel="noopener noreferrer"
         className="mt-1 inline-flex items-center gap-1 text-xs text-secundario hover:text-tinta"
       >
-        {t.fuente}
+        {pronostico.fuente}
         <IconExternal size={12} />
       </a>
     </section>
   );
 }
 
-/** Mapea el número de ícono de AccuWeather a un ícono de línea. */
-function IconoClima({ icono }: { icono: number }) {
-  if ([19, 20, 21, 22, 23, 24, 25, 26, 29, 43, 44].includes(icono))
-    return <IconSnow size={28} />;
-  if ([12, 13, 14, 15, 16, 17, 18, 39, 40, 41, 42].includes(icono))
-    return <IconRain size={28} />;
-  if ([1, 2, 3, 4, 5, 30, 33, 34].includes(icono)) return <IconSun size={28} />;
+/** Ícono de línea según la categoría de clima. */
+function IconoClima({ categoria }: { categoria: CategoriaClima }) {
+  if (categoria === "nieve") return <IconSnow size={28} />;
+  if (categoria === "lluvia" || categoria === "tormenta") return <IconRain size={28} />;
+  if (categoria === "sol") return <IconSun size={28} />;
   return <IconCloud size={28} />;
 }
 
@@ -69,5 +67,3 @@ function nombreDia(iso: string, lang: Idioma) {
     timeZone: "America/Santiago",
   }).format(fecha);
 }
-
-export type { DiaPronostico };

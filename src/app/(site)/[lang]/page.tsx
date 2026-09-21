@@ -54,8 +54,8 @@ export default async function InicioPage({
       </div>
 
       <p className="mt-12 max-w-2xl rounded-tarjeta border border-tinta/10 bg-white p-4 text-sm text-secundario">
-        Etapa 2 lista. El pronóstico de arriba usa AccuWeather (aparece al
-        configurar la API key). Las secciones de contenido llegan en la Etapa 3.
+        Etapa 2 lista. El pronóstico de arriba usa Open-Meteo (gratuito, sin API
+        key). Las secciones de contenido llegan en la Etapa 3.
       </p>
     </Container>
   );
