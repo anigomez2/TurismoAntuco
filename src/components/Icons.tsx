@@ -107,6 +107,28 @@ export const IconRain = (p: IconProps) => (
   </svg>
 );
 
+export const IconShield = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3z" />
+    <path d="M9.5 12l1.8 1.8L15 10" />
+  </svg>
+);
+
+export const IconLeaf = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M5 19c0-8 6-13 15-13 0 9-5 15-13 15a6 6 0 0 1-2-2z" />
+    <path d="M9 15c2-3 5-5 8-6" />
+  </svg>
+);
+
+export const IconRoute = (p: IconProps) => (
+  <svg {...base(p)}>
+    <circle cx="6" cy="19" r="2" />
+    <circle cx="18" cy="5" r="2" />
+    <path d="M8 19h6a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6" />
+  </svg>
+);
+
 export const IconInstagram = (p: IconProps) => (
   <svg {...base(p)}>
     <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />

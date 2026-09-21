@@ -11,10 +11,19 @@ export const configuracion = defineType({
   type: "document",
   groups: [
     { name: "contacto", title: "Contacto", default: true },
+    { name: "portada", title: "Portada" },
     { name: "redes", title: "Redes sociales" },
     { name: "enlaces", title: "Enlaces útiles" },
   ],
   fields: [
+    defineField({
+      name: "fotoPortada",
+      title: "Foto de portada (inicio)",
+      description:
+        "Fotografía a pantalla completa del hero en la página de inicio. Horizontal, de buena calidad.",
+      type: "fotoConAlt",
+      group: "portada",
+    }),
     defineField({
       name: "email",
       title: "Correo electrónico",
@@ -70,6 +79,24 @@ export const configuracion = defineType({
       type: "url",
       group: "enlaces",
       validation: (Rule) => Rule.uri({ scheme: ["http", "https"] }),
+    }),
+    defineField({
+      name: "camaraWebUrl",
+      title: "Cámara web en vivo (URL)",
+      description:
+        "Enlace a la cámara en vivo del acceso al parque, si existe. Se muestra en “Planifica tu visita”. Déjalo vacío si aún no hay.",
+      type: "url",
+      group: "enlaces",
+      validation: (Rule) => Rule.uri({ scheme: ["http", "https"] }),
+    }),
+    defineField({
+      name: "tarifasEntrada",
+      title: "Tarifas de entrada (texto)",
+      description:
+        "Valores de la entrada al parque. Ej.: “Adulto [PRECIO] · Niño [PRECIO] · Adulto mayor [PRECIO]”. Una línea por tarifa.",
+      type: "text",
+      rows: 4,
+      group: "enlaces",
     }),
   ],
   preview: {

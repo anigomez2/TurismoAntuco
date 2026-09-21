@@ -30,6 +30,9 @@ export interface Configuracion {
   instagram?: string;
   facebook?: string;
   enlaceEntradasConaf?: string;
+  camaraWebUrl?: string;
+  tarifasEntrada?: string;
+  fotoPortada?: FotoConAlt;
 }
 
 export type TipoPrestador = "alojamiento" | "comida" | "guia";
