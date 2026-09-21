@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
 import { IDIOMAS, esIdiomaValido } from "@/lib/i18n";
+import { StatusBar } from "@/components/StatusBar";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 export function generateStaticParams() {
   return IDIOMAS.map((lang) => ({ lang }));
 }
 
-/**
- * Layout del sitio público por idioma.
- * El header con la franja de estado y el footer se agregan en la Etapa 2.
- */
+/** Layout del sitio público por idioma: estado del día + header + footer. */
 export default async function SiteLayout({
   children,
   params,
@@ -20,8 +20,19 @@ export default async function SiteLayout({
   if (!esIdiomaValido(lang)) notFound();
 
   return (
-    <div className="min-h-screen">
-      <main className="mx-auto max-w-contenido px-4">{children}</main>
+    <div lang={lang} className="flex min-h-screen flex-col">
+      <a
+        href="#contenido"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-tinta focus:shadow"
+      >
+        {lang === "en" ? "Skip to content" : "Saltar al contenido"}
+      </a>
+      <StatusBar lang={lang} />
+      <Header lang={lang} />
+      <main id="contenido" className="flex-1">
+        {children}
+      </main>
+      <Footer lang={lang} />
     </div>
   );
 }

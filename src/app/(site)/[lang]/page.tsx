@@ -1,21 +1,58 @@
+import type { Metadata } from "next";
+import { esIdiomaValido } from "@/lib/i18n";
+import { getDiccionario } from "@/lib/dictionaries";
+import { rutas } from "@/lib/navegacion";
+import { Container } from "@/components/Container";
+import { Boton } from "@/components/Boton";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const d = getDiccionario(esIdiomaValido(lang) ? lang : "es");
+  return { title: "Antuco", description: d.slogan };
+}
+
 /**
- * Página de inicio — marcador de posición de la Etapa 1.
- * La maquetación real (franja de estado, hero, temporadas, etc.) llega en las
- * Etapas 2 y 3.
+ * Portada — interina (Etapa 2). En la Etapa 3 se agregan la franja hero con
+ * fotografía, "Antuco en cada temporada", experiencias, "antes de venir",
+ * alojamiento, agenda, guía de campo, historia y contacto.
  */
-export default function InicioPage() {
+export default async function InicioPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  const idioma = esIdiomaValido(lang) ? lang : "es";
+  const d = getDiccionario(idioma);
+  const r = rutas(idioma);
+
   return (
-    <section className="py-16">
-      <p className="font-titulo text-sm uppercase tracking-widest text-secundario">
-        Turismo Antuco
+    <Container as="section" className="py-16 sm:py-24">
+      <p className="font-titulo text-sm font-semibold uppercase tracking-[0.2em] text-secundario">
+        Parque Nacional Laguna del Laja · Biobío
       </p>
-      <h1 className="mt-2 text-display">
-        Ven, respira profundo y descubre Antuco
-      </h1>
+      <h1 className="mt-3 max-w-3xl text-display">{d.slogan}</h1>
       <p className="mt-6 max-w-2xl text-lg text-secundario">
-        Andamiaje del proyecto listo. Esta página se construye en la Etapa 2
-        (diseño base y componentes) y Etapa 3 (páginas).
+        {idioma === "en"
+          ? "Official tourism site of the Antuco commune. Volcano, lagoon and native forest — in all four seasons."
+          : "Sitio oficial de turismo de la comuna de Antuco. Volcán, laguna y bosque nativo — en las cuatro estaciones."}
       </p>
-    </section>
+      <div className="mt-8 flex flex-wrap gap-3">
+        <Boton href={r.planifica}>{d.nav.planifica}</Boton>
+        <Boton href={r.experiencias} variante="secundario">
+          {d.nav.experiencias}
+        </Boton>
+      </div>
+
+      <p className="mt-16 max-w-2xl rounded-tarjeta border border-tinta/10 bg-white p-4 text-sm text-secundario">
+        Etapa 2 (diseño base y componentes) en curso: ya funcionan la franja de
+        estado del día, la cabecera, el selector de idioma y el pie de página con
+        datos reales de Sanity. Las secciones de contenido llegan en la Etapa 3.
+      </p>
+    </Container>
   );
 }
