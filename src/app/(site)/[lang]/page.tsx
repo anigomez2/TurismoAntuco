@@ -4,6 +4,7 @@ import { getDiccionario } from "@/lib/dictionaries";
 import { rutas } from "@/lib/navegacion";
 import { Container } from "@/components/Container";
 import { Boton } from "@/components/Boton";
+import { Forecast } from "@/components/Forecast";
 
 export async function generateMetadata({
   params,
@@ -48,10 +49,13 @@ export default async function InicioPage({
         </Boton>
       </div>
 
-      <p className="mt-16 max-w-2xl rounded-tarjeta border border-tinta/10 bg-white p-4 text-sm text-secundario">
-        Etapa 2 (diseño base y componentes) en curso: ya funcionan la franja de
-        estado del día, la cabecera, el selector de idioma y el pie de página con
-        datos reales de Sanity. Las secciones de contenido llegan en la Etapa 3.
+      <div className="mt-12">
+        <Forecast lang={idioma} />
+      </div>
+
+      <p className="mt-12 max-w-2xl rounded-tarjeta border border-tinta/10 bg-white p-4 text-sm text-secundario">
+        Etapa 2 lista. El pronóstico de arriba usa AccuWeather (aparece al
+        configurar la API key). Las secciones de contenido llegan en la Etapa 3.
       </p>
     </Container>
   );

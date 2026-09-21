@@ -87,6 +87,26 @@ export const IconInfo = (p: IconProps) => (
   </svg>
 );
 
+export const IconSun = (p: IconProps) => (
+  <svg {...base(p)}>
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+  </svg>
+);
+
+export const IconCloud = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.3A3.5 3.5 0 0 1 17 18H7z" />
+  </svg>
+);
+
+export const IconRain = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M7 15a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.3A3.5 3.5 0 0 1 17 15" />
+    <path d="M8 18l-1 2M12 18l-1 2M16 18l-1 2" />
+  </svg>
+);
+
 export const IconInstagram = (p: IconProps) => (
   <svg {...base(p)}>
     <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />

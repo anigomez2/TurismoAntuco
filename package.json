@@ -10,7 +10,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "seed": "tsx scripts/seed.ts",
-    "seed:reset": "tsx scripts/seed.ts --reset"
+    "seed:reset": "tsx scripts/seed.ts --reset",
+    "accuweather:location": "tsx scripts/accuweather-location.ts"
   },
   "dependencies": {
     "@sanity/document-internationalization": "^3.3.0",
@@ -24,6 +25,7 @@
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "sanity": "^3.68.3",
+    "server-only": "^0.0.1",
     "styled-components": "^6.1.14"
   },
   "devDependencies": {
