@@ -14,15 +14,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Paleta oficial
-        fondo: "#F3F1EC", // fondo general (papel cálido)
-        tinta: "#1B2429", // texto principal / titulares
-        secundario: "#52605F", // texto secundario
-        glaciar: "#2A5D78", // acento azul glaciar (enlaces, botones)
-        cipres: "#3E5A38", // verde ciprés (estados positivos, distintivos)
+        // Paleta "brisa de montaña" — fría, aireada, neblinosa
+        fondo: "#EDF3F4", // fondo general (neblina fría con matiz azulado)
+        tinta: "#16303A", // texto principal / titulares (pizarra-pino)
+        secundario: "#52686E", // texto secundario (gris frío)
+        glaciar: "#216C82", // acento azul glaciar (enlaces, botones) — AA sobre fondo/blanco
+        cipres: "#3F6B52", // verde fresco (estados positivos, distintivos)
+        brisa: "#DCEAEE", // cielo tenue (tintes de sección, badges suaves)
         tarjeta: "#FFFFFF", // fondo de tarjetas
         // Estados operativos del "estado del día"
-        alerta: "#8A3B2B", // cerrado / advertencia (rojo tierra, no chillón)
+        alerta: "#9A3B2B", // cerrado / advertencia (rojo tierra, no chillón)
       },
       fontFamily: {
         // Cargadas con next/font en el layout; aquí referenciamos la variable CSS.

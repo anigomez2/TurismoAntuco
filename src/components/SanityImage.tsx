@@ -43,7 +43,7 @@ export function SanityImage({
       className={className}
       style={{
         aspectRatio: String(ratio),
-        backgroundColor: "#e7e3da",
+        backgroundColor: "#d9e5e8",
         backgroundImage: foto.lqip ? `url(${foto.lqip})` : undefined,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -62,7 +62,7 @@ export function PlaceholderImagen({
 }) {
   return (
     <div
-      className={`flex items-center justify-center bg-[#e7e3da] p-4 text-center ${className}`}
+      className={`flex items-center justify-center bg-[#d9e5e8] p-4 text-center ${className}`}
       style={{ aspectRatio: "3 / 2" }}
       role="img"
       aria-label={texto ? `Foto pendiente: ${texto}` : "Foto pendiente"}

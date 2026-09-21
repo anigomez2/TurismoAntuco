@@ -28,7 +28,7 @@ export async function StatusBar({ lang }: { lang: Idioma }) {
         <span className="flex items-center gap-2 font-titulo font-semibold">
           <span
             className={`inline-block h-2.5 w-2.5 rounded-full ${
-              abierto ? "bg-[#5f8f52]" : "bg-[#c96a54]"
+              abierto ? "bg-[#5fae86]" : "bg-[#d0715a]"
             }`}
             aria-hidden
           />

@@ -6,10 +6,10 @@ type Variante = "primario" | "secundario" | "whatsapp";
 
 const estilos: Record<Variante, string> = {
   primario:
-    "bg-glaciar text-white hover:bg-[#22506a] focus-visible:bg-[#22506a]",
+    "bg-glaciar text-white hover:bg-[#195868] focus-visible:bg-[#195868]",
   secundario:
     "border border-tinta/20 bg-white text-tinta hover:border-tinta/40",
-  whatsapp: "bg-cipres text-white hover:bg-[#354c30]",
+  whatsapp: "bg-cipres text-white hover:bg-[#335741]",
 };
 
 const claseBase =
