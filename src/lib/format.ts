@@ -18,6 +18,23 @@ export function urlWhatsApp(numero?: string, mensaje?: string): string | null {
   return `https://wa.me/${limpio}${texto}`;
 }
 
+/**
+ * Etiqueta del botón de reserva según la plataforma del enlace.
+ * Booking → "Reservar en Booking"; Airbnb → "Reservar en Airbnb"; otro → "Reservar".
+ */
+export function etiquetaReserva(url: string | undefined, lang: Idioma): string {
+  const base = lang === "en" ? "Book" : "Reservar";
+  if (!url) return base;
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, "").toLowerCase();
+    if (host.includes("booking")) return lang === "en" ? "Book on Booking" : "Reservar en Booking";
+    if (host.includes("airbnb")) return lang === "en" ? "Book on Airbnb" : "Reservar en Airbnb";
+  } catch {
+    /* URL inválida: se usa la etiqueta genérica */
+  }
+  return base;
+}
+
 /** Formatea una fecha ISO (YYYY-MM-DD) de forma legible según idioma. */
 export function formatearFecha(iso: string, lang: Idioma): string {
   const [y, m, d] = iso.split("-").map(Number);

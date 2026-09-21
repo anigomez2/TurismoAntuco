@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { type ReactNode } from "react";
-import { IconExternal, IconWhatsApp } from "@/components/Icons";
+import { IconExternal } from "@/components/Icons";
 
 type Variante = "primario" | "secundario" | "whatsapp";
 
@@ -25,6 +25,8 @@ export function Boton({
   externo = false,
   className = "",
   ariaLabel,
+  icono,
+  mostrarIconoExterno = true,
 }: {
   href: string;
   children: ReactNode;
@@ -32,12 +34,14 @@ export function Boton({
   externo?: boolean;
   className?: string;
   ariaLabel?: string;
+  icono?: ReactNode;
+  mostrarIconoExterno?: boolean;
 }) {
   const contenido = (
     <>
-      {variante === "whatsapp" && <IconWhatsApp size={18} />}
+      {icono}
       {children}
-      {externo && variante !== "whatsapp" && <IconExternal size={16} />}
+      {externo && mostrarIconoExterno && !icono && <IconExternal size={16} />}
     </>
   );
   const clase = `${claseBase} ${estilos[variante]} ${className}`;

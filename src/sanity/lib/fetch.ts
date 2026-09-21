@@ -1,4 +1,19 @@
-import { client } from "./client";
+import { createClient } from "next-sanity";
+import { apiVersion, dataset, projectId } from "@/sanity/env";
+
+/**
+ * Cliente de servidor con token de lectura. Se usa SOLO en Server Components
+ * (el token nunca se envía al navegador: no lleva prefijo NEXT_PUBLIC_).
+ * Así el sitio lee el contenido publicado aunque el dataset sea privado.
+ */
+const serverClient = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false,
+  perspective: "published",
+  token: process.env.SANITY_API_READ_TOKEN,
+});
 
 /**
  * Etiquetas de caché por tipo de documento. El webhook de Sanity revalida la
@@ -30,7 +45,7 @@ export async function sanityFetch<T>({
   params?: Record<string, unknown>;
   tags: Tag[];
 }): Promise<T> {
-  return client.fetch<T>(query, params, {
+  return serverClient.fetch<T>(query, params, {
     next: { tags },
   });
 }
