@@ -10,7 +10,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "seed": "tsx scripts/seed.ts",
-    "seed:reset": "tsx scripts/seed.ts --reset"
+    "seed:reset": "tsx scripts/seed.ts --reset",
+    "seed:historia": "tsx scripts/seed-historia.ts"
   },
   "dependencies": {
     "@sanity/document-internationalization": "^3.3.0",

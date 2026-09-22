@@ -88,14 +88,20 @@ export interface Evento {
 export interface HistoriaSeccion {
   tituloEs: string;
   tituloEn?: string;
-  textoEs: string;
-  textoEn?: string;
+  slug: string;
+  resumenEs: string;
+  resumenEn?: string;
+  contenidoEs: string;
+  contenidoEn?: string;
   foto?: FotoConAlt;
 }
 
 export interface Historia {
-  bajadaEs?: string;
-  bajadaEn?: string;
+  heroTituloEs?: string;
+  heroTituloEn?: string;
+  heroTextoEs?: string;
+  heroTextoEn?: string;
+  heroFoto?: FotoConAlt;
   secciones?: HistoriaSeccion[];
 }
 

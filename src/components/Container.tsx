@@ -8,7 +8,7 @@ export function Container({
 }: {
   children: ReactNode;
   className?: string;
-  as?: "div" | "section" | "header" | "footer" | "main" | "nav";
+  as?: "div" | "section" | "header" | "footer" | "main" | "nav" | "article";
 }) {
   return (
     <Tag className={`mx-auto w-full max-w-contenido px-4 sm:px-6 ${className}`}>

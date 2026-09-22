@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { esIdiomaValido } from "@/lib/i18n";
 import { getDiccionario } from "@/lib/dictionaries";
@@ -8,7 +9,10 @@ import { historiaQuery } from "@/sanity/lib/queries";
 import type { Historia } from "@/sanity/lib/types";
 import { Container } from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
-import { SeccionPromo } from "@/components/SeccionPromo";
+import { Card } from "@/components/Card";
+import { SanityImage } from "@/components/SanityImage";
+import { Parrafos } from "@/components/Parrafos";
+import { Boton } from "@/components/Boton";
 
 export async function generateMetadata({
   params,
@@ -20,44 +24,10 @@ export async function generateMetadata({
   return {
     title: en ? "History & heritage" : "Historia y patrimonio",
     description: en
-      ? "The hydroelectric villages, the muleteers and the town of Antuco."
-      : "Las villas hidroeléctricas, los arrieros y el pueblo de Antuco.",
+      ? "Geological history, hydroelectric villages, muleteers, the origins of Antuco and Fort Ballenar."
+      : "Historia geológica, villas hidroeléctricas, arrieros, los orígenes de Antuco y el Fuerte Ballenar.",
   };
 }
-
-// Contenido de respaldo, por si el documento de Sanity aún no se ha completado.
-const RESPALDO = [
-  {
-    tituloEs: "Las villas hidroeléctricas (Abanico)",
-    tituloEn: "The hydroelectric villages (Abanico)",
-    textoEs:
-      "A comienzos del siglo XX, la central El Abanico trajo a la montaña a trabajadores y sus familias. Las villas que crecieron a su alrededor marcaron la identidad de la comuna alta, y su patrimonio construido aún se conserva junto al río Laja.",
-    textoEn:
-      "In the early 20th century, the El Abanico power plant brought workers and their families to the mountains. The villages that grew around it shaped the identity of the upper commune, and their heritage buildings still stand by the Laja river.",
-    fotoEs: "Antigua casa de máquinas hidroeléctrica en Abanico",
-    fotoEn: "Old hydroelectric power house in Abanico",
-  },
-  {
-    tituloEs: "Arrieros y la ruta pehuenche",
-    tituloEn: "Muleteers and the Pehuenche route",
-    textoEs:
-      "Mucho antes de los caminos, los arrieros cruzaban la cordillera por antiguas huellas pehuenches, comerciando entre el valle y el lado argentino por el Paso Pichachén. Esa cultura de montaña sigue viva en las cabalgatas y los guías locales de hoy.",
-    textoEn:
-      "Long before the roads, muleteers crossed the range along ancient Pehuenche paths, trading between the valley and the Argentine side through the Pichachén Pass. That mountain culture lives on in today's horseback rides and local guides.",
-    fotoEs: "Arriero con caballos en un sendero de montaña",
-    fotoEn: "Muleteer with horses on a mountain trail",
-  },
-  {
-    tituloEs: "El pueblo de Antuco",
-    tituloEn: "The town of Antuco",
-    textoEs:
-      "Al pie del volcán, el pueblo de Antuco conserva el ritmo tranquilo de una comuna rural: su plaza, sus tradiciones y su gente, que hoy abre las puertas a quienes buscan naturaleza y calma.",
-    textoEn:
-      "At the foot of the volcano, the town of Antuco keeps the calm pace of a rural commune: its plaza, its traditions and its people, who today open their doors to visitors seeking nature and quiet.",
-    fotoEs: "Plaza del pueblo de Antuco con el volcán detrás",
-    fotoEn: "Antuco town plaza with the volcano behind",
-  },
-];
 
 export default async function HistoriaPage({
   params,
@@ -74,49 +44,86 @@ export default async function HistoriaPage({
     tags: [TAGS.historia],
   });
 
-  const bajada =
-    (en ? historia?.bajadaEn : historia?.bajadaEs) ||
-    (en
-      ? "A century of mountain life between water, mules and the volcano."
-      : "Un siglo de vida de montaña entre el agua, las mulas y el volcán.");
-
-  // Usa las secciones de Sanity si existen; si no, el contenido de respaldo.
-  const secciones =
-    historia?.secciones && historia.secciones.length > 0
-      ? historia.secciones.map((s) => ({
-          titulo: (en ? s.tituloEn : s.tituloEs) || s.tituloEs,
-          texto: (en ? s.textoEn : s.textoEs) || s.textoEs,
-          foto: s.foto,
-          descripcionFoto: undefined as string | undefined,
-        }))
-      : RESPALDO.map((s) => ({
-          titulo: en ? s.tituloEn : s.tituloEs,
-          texto: en ? s.textoEn : s.textoEs,
-          foto: undefined,
-          descripcionFoto: en ? s.fotoEn : s.fotoEs,
-        }));
+  const heroTitulo =
+    (en ? historia?.heroTituloEn : historia?.heroTituloEs) ||
+    (en ? "The geological history of Antuco" : "La historia geológica de Antuco");
+  const heroTexto = en ? historia?.heroTextoEn : historia?.heroTextoEs;
+  const secciones = historia?.secciones ?? [];
 
   return (
     <>
       <PageHeader
         migas={[{ label: d.nav.inicio, href: rutas(lang).inicio }, { label: d.nav.historia }]}
         titulo={en ? "History & heritage" : "Historia y patrimonio"}
-        bajada={bajada}
+        bajada={
+          en
+            ? "How the landscape formed and the people who have called it home."
+            : "Cómo se formó el paisaje y la gente que lo ha habitado."
+        }
       />
 
-      <Container as="section" className="space-y-14 pb-16">
-        {secciones.map((s, i) => (
-          <SeccionPromo
-            key={i}
-            invertir={i % 2 === 1}
-            titulo={s.titulo}
-            texto={s.texto}
-            hrefBoton={rutas(lang).explorando}
-            etiquetaBoton={en ? "Field guide" : "Guía de campo"}
-            foto={s.foto}
-            descripcionFoto={s.descripcionFoto}
-          />
-        ))}
+      {/* Hero: historia geológica */}
+      <section className="bg-tinta text-white">
+        <Container className="grid items-center gap-8 py-12 md:grid-cols-2 md:py-16">
+          <div>
+            <p className="font-titulo text-sm font-semibold uppercase tracking-[0.2em] text-white/60">
+              {en ? "Geological history" : "Historia geológica"}
+            </p>
+            <h2 className="mt-2 text-3xl text-white sm:text-4xl">{heroTitulo}</h2>
+            <div className="mt-4 text-white/85">
+              <Parrafos texto={heroTexto} className="text-white/85" />
+            </div>
+          </div>
+          <div className="overflow-hidden rounded-tarjeta">
+            <SanityImage
+              foto={historia?.heroFoto}
+              priority
+              sizes="(min-width:768px) 520px, 100vw"
+              className="w-full object-cover"
+              descripcionPendiente={
+                en ? "Antuco volcano and Laguna del Laja" : "Volcán Antuco y la Laguna del Laja"
+              }
+            />
+          </div>
+        </Container>
+      </section>
+
+      {/* Secciones temáticas */}
+      <Container as="section" className="py-14">
+        <ul className="grid gap-6 md:grid-cols-2">
+          {secciones.map((s) => {
+            const titulo = (en ? s.tituloEn : s.tituloEs) || s.tituloEs;
+            const resumen = (en ? s.resumenEn : s.resumenEs) || s.resumenEs;
+            const href = `${rutas(lang).historia}/${s.slug}`;
+            return (
+              <li key={s.slug}>
+                <Card className="flex h-full flex-col">
+                  <Link href={href} tabIndex={-1} aria-hidden className="block">
+                    <SanityImage
+                      foto={s.foto}
+                      sizes="(min-width:768px) 520px, 100vw"
+                      className="w-full object-cover"
+                      descripcionPendiente={titulo}
+                    />
+                  </Link>
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="text-2xl leading-tight">
+                      <Link href={href} className="text-tinta no-underline hover:text-glaciar">
+                        {titulo}
+                      </Link>
+                    </h3>
+                    <p className="mt-2 flex-1 text-secundario">{resumen}</p>
+                    <div className="mt-4">
+                      <Boton href={href} variante="secundario">
+                        {en ? "Read more" : "Leer más"}
+                      </Boton>
+                    </div>
+                  </div>
+                </Card>
+              </li>
+            );
+          })}
+        </ul>
       </Container>
     </>
   );

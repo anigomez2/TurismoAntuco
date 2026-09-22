@@ -2,32 +2,46 @@ import { defineType, defineField } from "sanity";
 
 /**
  * HISTORIA Y PATRIMONIO — documento único (singleton).
- * Contenido editable de la página "Historia y patrimonio": una bajada y varias
- * secciones (título, texto y foto), en español e inglés. El inglés es opcional.
+ * Tiene un "hero" (la historia geológica de Antuco) y varias secciones temáticas.
+ * Cada sección tiene un resumen (para la tarjeta) y un contenido completo (para
+ * su propia página de detalle). Todo en español e inglés; el inglés es opcional.
  */
 export const historia = defineType({
   name: "historia",
   title: "Historia y patrimonio",
   type: "document",
+  groups: [
+    { name: "hero", title: "Hero (historia geológica)", default: true },
+    { name: "secciones", title: "Secciones" },
+  ],
   fields: [
+    // --- Hero: historia geológica ---
     defineField({
-      name: "bajadaEs",
-      title: "Bajada / introducción (español)",
-      description: "Frase corta bajo el título de la página.",
-      type: "text",
-      rows: 2,
+      name: "heroTituloEs",
+      title: "Título del hero (español)",
+      type: "string",
+      group: "hero",
+      initialValue: "La historia geológica de Antuco",
     }),
+    defineField({ name: "heroTituloEn", title: "Título del hero (inglés)", type: "string", group: "hero" }),
     defineField({
-      name: "bajadaEn",
-      title: "Bajada / introducción (inglés)",
+      name: "heroTextoEs",
+      title: "Historia geológica (español)",
+      description: "Separa los párrafos con una línea en blanco.",
       type: "text",
-      rows: 2,
+      rows: 8,
+      group: "hero",
     }),
+    defineField({ name: "heroTextoEn", title: "Historia geológica (inglés)", type: "text", rows: 8, group: "hero" }),
+    defineField({ name: "heroFoto", title: "Foto del hero", type: "fotoConAlt", group: "hero" }),
+
+    // --- Secciones temáticas ---
     defineField({
       name: "secciones",
       title: "Secciones",
-      description: "Cada bloque de historia, en orden. Arrastra para reordenar.",
+      description: "Cada tema con su tarjeta y su página de detalle. Arrastra para reordenar.",
       type: "array",
+      group: "secciones",
       of: [
         {
           type: "object",
@@ -42,17 +56,35 @@ export const historia = defineType({
             },
             { name: "tituloEn", title: "Título (inglés)", type: "string" },
             {
-              name: "textoEs",
-              title: "Texto (español)",
-              type: "text",
-              rows: 5,
+              name: "slug",
+              title: "Dirección web (slug)",
+              description: "Se genera desde el título. Parte final de la URL de la página del tema.",
+              type: "slug",
+              options: { source: "tituloEs", maxLength: 60 },
               validation: (Rule) => Rule.required(),
             },
-            { name: "textoEn", title: "Texto (inglés)", type: "text", rows: 5 },
+            {
+              name: "resumenEs",
+              title: "Resumen (español)",
+              description: "Texto corto que aparece en la tarjeta de la página de Historia.",
+              type: "text",
+              rows: 3,
+              validation: (Rule) => Rule.required(),
+            },
+            { name: "resumenEn", title: "Resumen (inglés)", type: "text", rows: 3 },
+            {
+              name: "contenidoEs",
+              title: "Contenido completo (español)",
+              description: "El artículo de la página del tema. Separa los párrafos con una línea en blanco.",
+              type: "text",
+              rows: 12,
+              validation: (Rule) => Rule.required(),
+            },
+            { name: "contenidoEn", title: "Contenido completo (inglés)", type: "text", rows: 12 },
             { name: "foto", title: "Foto", type: "fotoConAlt" },
           ],
           preview: {
-            select: { title: "tituloEs", subtitle: "tituloEn", media: "foto" },
+            select: { title: "tituloEs", subtitle: "slug.current", media: "foto" },
           },
         },
       ],
