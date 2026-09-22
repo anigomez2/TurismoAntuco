@@ -1,5 +1,40 @@
 import { defineType, defineField } from "sanity";
 
+/** Bloque de texto enriquecido: párrafos y subtítulos, con negrita/cursiva. */
+function contenidoBloque() {
+  return {
+    type: "block" as const,
+    styles: [
+      { title: "Normal", value: "normal" },
+      { title: "Subtítulo", value: "h3" },
+    ],
+    lists: [{ title: "Viñetas", value: "bullet" }],
+    marks: {
+      decorators: [
+        { title: "Negrita", value: "strong" },
+        { title: "Cursiva", value: "em" },
+      ],
+    },
+  };
+}
+
+/** Imagen insertable dentro del artículo, con texto alternativo y pie de foto. */
+function contenidoImagen() {
+  return {
+    type: "image" as const,
+    options: { hotspot: true },
+    fields: [
+      {
+        name: "alt",
+        title: "Texto alternativo",
+        type: "string",
+        validation: (Rule: { required: () => unknown }) => Rule.required(),
+      },
+      { name: "caption", title: "Pie de foto (opcional)", type: "string" },
+    ],
+  };
+}
+
 /**
  * HISTORIA Y PATRIMONIO — documento único (singleton).
  * Tiene un "hero" (la historia geológica de Antuco) y varias secciones temáticas.
@@ -37,13 +72,28 @@ export const historia = defineType({
       name: "heroContenidoEs",
       title: "Historia geológica — artículo completo (español)",
       description:
-        "Texto completo de la página dedicada a la historia geológica. Separa los párrafos con una línea en blanco.",
+        "Artículo de la página dedicada. Usa el estilo “Subtítulo” para dividir secciones y el botón de imagen para insertar fotos donde quieras.",
+      type: "array",
+      group: "hero",
+      of: [contenidoBloque(), contenidoImagen()],
+    }),
+    defineField({
+      name: "heroContenidoEn",
+      title: "Historia geológica — artículo completo (inglés)",
+      type: "array",
+      group: "hero",
+      of: [contenidoBloque(), contenidoImagen()],
+    }),
+    defineField({
+      name: "heroFuentesEs",
+      title: "Fuentes (español)",
+      description: "Se muestran al final del artículo, en letra pequeña.",
       type: "text",
-      rows: 16,
+      rows: 2,
       group: "hero",
     }),
-    defineField({ name: "heroContenidoEn", title: "Historia geológica — artículo completo (inglés)", type: "text", rows: 16, group: "hero" }),
-    defineField({ name: "heroFoto", title: "Foto del hero", type: "fotoConAlt", group: "hero" }),
+    defineField({ name: "heroFuentesEn", title: "Fuentes (inglés)", type: "text", rows: 2, group: "hero" }),
+    defineField({ name: "heroFoto", title: "Foto de portada del artículo", type: "fotoConAlt", group: "hero" }),
 
     // --- Secciones temáticas ---
     defineField({

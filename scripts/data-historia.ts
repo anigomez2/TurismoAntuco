@@ -1,5 +1,18 @@
 import { randomUUID } from "node:crypto";
 
+/** Construye un bloque de Portable Text (párrafo o subtítulo). */
+function blk(text: string, style: "normal" | "h3" = "normal") {
+  return {
+    _key: randomUUID(),
+    _type: "block",
+    style,
+    markDefs: [],
+    children: [{ _key: randomUUID(), _type: "span", text, marks: [] }],
+  };
+}
+const p = (t: string) => blk(t, "normal");
+const h = (t: string) => blk(t, "h3");
+
 /**
  * Contenido de "Historia y patrimonio", investigado en fuentes públicas
  * (ver la línea "Fuentes" al final de cada tema). Es el punto de partida
@@ -37,36 +50,40 @@ Hace aproximadamente 9.700 años, un gran colapso de su flanco generó una avala
     heroTextoEn: `Antuco volcano (2,979 m) is a stratovolcano of basaltic and basaltic-andesitic composition whose activity began about 130,000 years ago, in the late Pleistocene. It is one of the youngest and most active volcanoes in southern Chile.
 
 About 9,700 years ago, a great collapse of its flank generated an avalanche that ran tens of kilometres down the Laja river valley and dammed its outlet: this is how Laguna del Laja was formed. That past explains the landscape we see today, with the almost perfect cone of Antuco beside the lagoon and the fields of black lava.`,
-    heroContenidoEs: `El volcán Antuco, de 2.979 metros de altura, es un estratovolcán mixto de composición fundamentalmente basáltica y andesítico-basáltica. Es uno de los volcanes más jóvenes y activos del sur de Chile, y su historia geológica explica buena parte del paisaje que hoy protege el Parque Nacional Laguna del Laja.
-
-El escenario previo: la Sierra Velluda. Antes de que existiera el Antuco, la zona ya estaba dominada por la Sierra Velluda, un estratovolcán mucho más antiguo (Pleistoceno medio, hace entre 600.000 y 300.000 años) ubicado al oeste de la actual laguna. Se estima que la Sierra Velluda llegó a embalsar el valle superior del Laja, dando lugar a un primitivo lago que después desapareció por la erosión de los glaciares. En efecto, todo el valle fue modelado por la acción glaciar del Pleistoceno antes de que la actividad volcánica pasara a dominar el paisaje.
-
-Los dos Antucos. La actividad del volcán Antuco comenzó hace unos 130.000 años, a fines del Pleistoceno superior. Su historia tiene dos grandes edificios. El primero, llamado volcán Laja o «el gran cono» (Antuco 1), fue un cono de más de 2.000 metros y unos 12 kilómetros de diámetro basal, construido sobre rocas estratificadas del Mioceno y sobre los materiales de la vecina Sierra Velluda.
-
-El gran colapso y el nacimiento de la Laguna del Laja. Hace aproximadamente 9.700 años (± 600), una erupción freatomagmática de tipo Bandai-San provocó el colapso gravitacional del flanco de Antuco 1. Se desprendió una voluminosa avalancha de escombros que descendió al menos 40 kilómetros por el valle del río Laja y represó su desagüe natural. Con el cauce bloqueado, el agua se acumuló y el nivel del lago llegó a subir cerca de 100 metros sobre la cota actual: así se formó la Laguna del Laja, embalsada por el propio volcán.
-
-El Antuco de hoy. Sobre el anfiteatro que dejó ese colapso creció un segundo edificio, Antuco 2: el cono central casi perfecto que vemos hoy, acompañado de algunos centros de emisión adventicios en sus faldas. Es el cono negro y simétrico que domina la postal del parque.
-
-Un volcán todavía activo. En tiempos históricos, el Antuco ha registrado al menos diecisiete erupciones entre 1739 y 1911, con una frecuencia cercana a una cada diez años. Entre los episodios más recordados están las coladas de lava en su flanco norte (1752), la gran erupción de 1828-1829 —que atrajo a naturalistas y en cuyo contexto el científico Eduardo Poeppig realizó en 1829 el primer ascenso, considerado el inicio del andinismo chileno— y las erupciones del cráter central y del centro Los Pangues (1852-1853). En la actualidad, el volcán solo presenta una débil actividad fumarólica y es vigilado por la Red Nacional de Vigilancia Volcánica del Sernageomin.
-
-Hielo y paisaje. Las alturas de la Sierra Velluda y del macizo conservan glaciares, hoy en marcada retracción. La suma de todo —el volcanismo, los glaciares y el represamiento del río— dio origen al paisaje singular del Parque Nacional Laguna del Laja: el cono del Antuco, la laguna de aguas turquesas retenida por lava, los extensos campos de escoria negra y el bosque de araucarias.
-
-Fuentes: Red Nacional de Vigilancia Volcánica, Sernageomin; Wikipedia (Volcán Antuco); «Evolución geológico-geomorfológica cuaternaria del tramo superior del valle del río Laja», SciELO Chile; Andeshandbook.`,
-    heroContenidoEn: `Antuco volcano, 2,979 metres high, is a mixed stratovolcano of mainly basaltic and basaltic-andesitic composition. It is one of the youngest and most active volcanoes in southern Chile, and its geological history explains much of the landscape now protected by Laguna del Laja National Park.
-
-The earlier stage: Sierra Velluda. Before Antuco existed, the area was already dominated by Sierra Velluda, a much older stratovolcano (Middle Pleistocene, between 600,000 and 300,000 years ago) located west of the present lagoon. Sierra Velluda is thought to have dammed the upper Laja valley, giving rise to a primitive lake that later disappeared through glacial erosion. Indeed, the whole valley was shaped by Pleistocene glaciation before volcanic activity came to dominate the landscape.
-
-The two Antucos. Antuco's activity began about 130,000 years ago, in the late Upper Pleistocene. Its history has two great edifices. The first, called the Laja volcano or "the great cone" (Antuco 1), was a cone over 2,000 metres high and about 12 kilometres in basal diameter, built on stratified Miocene rocks and on materials from neighbouring Sierra Velluda.
-
-The great collapse and the birth of Laguna del Laja. About 9,700 years ago (± 600), a phreatomagmatic eruption of the Bandai-San type caused the gravitational collapse of Antuco 1's flank. A voluminous debris avalanche broke off and ran at least 40 kilometres down the Laja river valley, damming its natural outlet. With the channel blocked, water accumulated and the lake rose about 100 metres above its current level: this is how Laguna del Laja was formed, dammed by the volcano itself.
-
-Antuco today. Over the amphitheatre left by that collapse, a second edifice grew, Antuco 2: the almost perfect central cone we see today, accompanied by a few adventitious vents on its slopes. It is the black, symmetrical cone that dominates the postcard of the park.
-
-A still-active volcano. In historical times, Antuco has recorded at least seventeen eruptions between 1739 and 1911, at a frequency of roughly one every ten years. Among the most remembered episodes are the lava flows on its northern flank (1752), the great eruption of 1828-1829 —which attracted naturalists and during which the scientist Eduard Poeppig made the first ascent in 1829, considered the start of Chilean mountaineering— and the eruptions of the central crater and the Los Pangues vent (1852-1853). Today the volcano shows only weak fumarolic activity and is monitored by Sernageomin's National Volcanic Surveillance Network.
-
-Ice and landscape. The heights of Sierra Velluda and the massif hold glaciers, now in marked retreat. The sum of it all —volcanism, glaciers and the damming of the river— gave rise to the singular landscape of Laguna del Laja National Park: the cone of Antuco, the turquoise lagoon held back by lava, the vast fields of black scoria and the araucaria forest.
-
-Sources: National Volcanic Surveillance Network, Sernageomin; Wikipedia (Volcán Antuco); "Quaternary geological-geomorphological evolution of the upper Laja river valley", SciELO Chile; Andeshandbook.`,
+    heroContenidoEs: [
+      p("El volcán Antuco, de 2.979 metros de altura, es un estratovolcán mixto de composición fundamentalmente basáltica y andesítico-basáltica. Es uno de los volcanes más jóvenes y activos del sur de Chile, y su historia geológica explica buena parte del paisaje que hoy protege el Parque Nacional Laguna del Laja."),
+      h("El escenario previo: la Sierra Velluda"),
+      p("Antes de que existiera el Antuco, la zona ya estaba dominada por la Sierra Velluda, un estratovolcán mucho más antiguo (Pleistoceno medio, hace entre 600.000 y 300.000 años) ubicado al oeste de la actual laguna. Se estima que la Sierra Velluda llegó a embalsar el valle superior del Laja, dando lugar a un primitivo lago que después desapareció por la erosión de los glaciares. En efecto, todo el valle fue modelado por la acción glaciar del Pleistoceno antes de que la actividad volcánica pasara a dominar el paisaje."),
+      h("Los dos Antucos"),
+      p("La actividad del volcán Antuco comenzó hace unos 130.000 años, a fines del Pleistoceno superior. Su historia tiene dos grandes edificios. El primero, llamado volcán Laja o «el gran cono» (Antuco 1), fue un cono de más de 2.000 metros y unos 12 kilómetros de diámetro basal, construido sobre rocas estratificadas del Mioceno y sobre los materiales de la vecina Sierra Velluda."),
+      h("El gran colapso y el nacimiento de la Laguna del Laja"),
+      p("Hace aproximadamente 9.700 años (± 600), una erupción freatomagmática de tipo Bandai-San provocó el colapso gravitacional del flanco de Antuco 1. Se desprendió una voluminosa avalancha de escombros que descendió al menos 40 kilómetros por el valle del río Laja y represó su desagüe natural. Con el cauce bloqueado, el agua se acumuló y el nivel del lago llegó a subir cerca de 100 metros sobre la cota actual: así se formó la Laguna del Laja, embalsada por el propio volcán."),
+      h("El Antuco de hoy"),
+      p("Sobre el anfiteatro que dejó ese colapso creció un segundo edificio, Antuco 2: el cono central casi perfecto que vemos hoy, acompañado de algunos centros de emisión adventicios en sus faldas. Es el cono negro y simétrico que domina la postal del parque."),
+      h("Un volcán todavía activo"),
+      p("En tiempos históricos, el Antuco ha registrado al menos diecisiete erupciones entre 1739 y 1911, con una frecuencia cercana a una cada diez años. Entre los episodios más recordados están las coladas de lava en su flanco norte (1752), la gran erupción de 1828-1829 —que atrajo a naturalistas y en cuyo contexto el científico Eduardo Poeppig realizó en 1829 el primer ascenso, considerado el inicio del andinismo chileno— y las erupciones del cráter central y del centro Los Pangues (1852-1853). En la actualidad, el volcán solo presenta una débil actividad fumarólica y es vigilado por la Red Nacional de Vigilancia Volcánica del Sernageomin."),
+      h("Hielo y paisaje"),
+      p("Las alturas de la Sierra Velluda y del macizo conservan glaciares, hoy en marcada retracción. La suma de todo —el volcanismo, los glaciares y el represamiento del río— dio origen al paisaje singular del Parque Nacional Laguna del Laja: el cono del Antuco, la laguna de aguas turquesas retenida por lava, los extensos campos de escoria negra y el bosque de araucarias."),
+    ],
+    heroContenidoEn: [
+      p("Antuco volcano, 2,979 metres high, is a mixed stratovolcano of mainly basaltic and basaltic-andesitic composition. It is one of the youngest and most active volcanoes in southern Chile, and its geological history explains much of the landscape now protected by Laguna del Laja National Park."),
+      h("The earlier stage: Sierra Velluda"),
+      p("Before Antuco existed, the area was already dominated by Sierra Velluda, a much older stratovolcano (Middle Pleistocene, between 600,000 and 300,000 years ago) located west of the present lagoon. Sierra Velluda is thought to have dammed the upper Laja valley, giving rise to a primitive lake that later disappeared through glacial erosion. Indeed, the whole valley was shaped by Pleistocene glaciation before volcanic activity came to dominate the landscape."),
+      h("The two Antucos"),
+      p("Antuco's activity began about 130,000 years ago, in the late Upper Pleistocene. Its history has two great edifices. The first, called the Laja volcano or «the great cone» (Antuco 1), was a cone over 2,000 metres high and about 12 kilometres in basal diameter, built on stratified Miocene rocks and on materials from neighbouring Sierra Velluda."),
+      h("The great collapse and the birth of Laguna del Laja"),
+      p("About 9,700 years ago (± 600), a phreatomagmatic eruption of the Bandai-San type caused the gravitational collapse of Antuco 1's flank. A voluminous debris avalanche broke off and ran at least 40 kilometres down the Laja river valley, damming its natural outlet. With the channel blocked, water accumulated and the lake rose about 100 metres above its current level: this is how Laguna del Laja was formed, dammed by the volcano itself."),
+      h("Antuco today"),
+      p("Over the amphitheatre left by that collapse, a second edifice grew, Antuco 2: the almost perfect central cone we see today, accompanied by a few adventitious vents on its slopes. It is the black, symmetrical cone that dominates the postcard of the park."),
+      h("A still-active volcano"),
+      p("In historical times, Antuco has recorded at least seventeen eruptions between 1739 and 1911, at a frequency of roughly one every ten years. Among the most remembered episodes are the lava flows on its northern flank (1752), the great eruption of 1828-1829 —which attracted naturalists and during which the scientist Eduard Poeppig made the first ascent in 1829, considered the start of Chilean mountaineering— and the eruptions of the central crater and the Los Pangues vent (1852-1853). Today the volcano shows only weak fumarolic activity and is monitored by Sernageomin's National Volcanic Surveillance Network."),
+      h("Ice and landscape"),
+      p("The heights of Sierra Velluda and the massif hold glaciers, now in marked retreat. The sum of it all —volcanism, glaciers and the damming of the river— gave rise to the singular landscape of Laguna del Laja National Park: the cone of Antuco, the turquoise lagoon held back by lava, the vast fields of black scoria and the araucaria forest."),
+    ],
+    heroFuentesEs:
+      "Red Nacional de Vigilancia Volcánica, Sernageomin; Wikipedia (Volcán Antuco); «Evolución geológico-geomorfológica cuaternaria del tramo superior del valle del río Laja», SciELO Chile; Andeshandbook.",
+    heroFuentesEn:
+      "National Volcanic Surveillance Network, Sernageomin; Wikipedia (Volcán Antuco); “Quaternary geological-geomorphological evolution of the upper Laja river valley”, SciELO Chile; Andeshandbook.",
     secciones: [
       seccion({
         tituloEs: "Las villas hidroeléctricas (Abanico)",

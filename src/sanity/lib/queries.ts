@@ -16,10 +16,20 @@ export const estadoQuery = groq`
   }
 `;
 
+const CONTENIDO_RICO = groq`{
+  ...,
+  _type == "image" => {
+    _type, _key, alt, caption, asset,
+    "lqip": asset->metadata.lqip,
+    "dims": asset->metadata.dimensions{ width, height }
+  }
+}`;
+
 export const historiaQuery = groq`
   *[_type == "historia"][0]{
     heroTituloEs, heroTituloEn, heroTextoEs, heroTextoEn,
-    heroContenidoEs, heroContenidoEn, heroFoto${IMG},
+    heroContenidoEs[]${CONTENIDO_RICO}, heroContenidoEn[]${CONTENIDO_RICO},
+    heroFuentesEs, heroFuentesEn, heroFoto${IMG},
     secciones[]{
       tituloEs, tituloEn, "slug": slug.current,
       resumenEs, resumenEn, contenidoEs, contenidoEn, foto${IMG}

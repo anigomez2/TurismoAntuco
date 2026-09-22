@@ -9,6 +9,7 @@ import type { Historia } from "@/sanity/lib/types";
 import { Container } from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
 import { SanityImage } from "@/components/SanityImage";
+import { ArticuloRico } from "@/components/ArticuloRico";
 import { Parrafos } from "@/components/Parrafos";
 
 export async function generateMetadata({
@@ -45,9 +46,9 @@ export default async function GeologiaPage({
   const titulo =
     (en ? historia?.heroTituloEn : historia?.heroTituloEs) ||
     (en ? "The geological history of the Antuco Volcano" : "La historia geológica del Volcán Antuco");
-  const contenido =
-    (en ? historia?.heroContenidoEn : historia?.heroContenidoEs) ||
-    (en ? historia?.heroTextoEn : historia?.heroTextoEs);
+  const contenido = en ? historia?.heroContenidoEn : historia?.heroContenidoEs;
+  const textoRespaldo = en ? historia?.heroTextoEn : historia?.heroTextoEs;
+  const fuentes = en ? historia?.heroFuentesEn : historia?.heroFuentesEs;
 
   return (
     <>
@@ -58,18 +59,48 @@ export default async function GeologiaPage({
           { label: titulo },
         ]}
         titulo={titulo}
+        bajada={
+          en
+            ? "Volcano, glaciers and a collapse that dammed a river to form the lagoon."
+            : "Volcán, glaciares y un colapso que represó un río para formar la laguna."
+        }
       />
 
-      <Container as="article" className="pb-16">
+      <Container as="article" className="pb-20">
         <div className="mx-auto max-w-3xl">
+          {/* Portada del artículo */}
           {historia?.heroFoto && (
-            <div className="mb-8 overflow-hidden rounded-tarjeta">
-              <SanityImage foto={historia.heroFoto} priority sizes="(min-width:768px) 768px, 100vw" className="w-full object-cover" />
+            <figure className="mb-10 overflow-hidden rounded-tarjeta">
+              <SanityImage
+                foto={historia.heroFoto}
+                priority
+                sizes="(min-width: 768px) 768px, 100vw"
+                className="w-full object-cover"
+              />
+              {historia.heroFoto.alt && (
+                <figcaption className="mt-2 text-sm text-secundario">{historia.heroFoto.alt}</figcaption>
+              )}
+            </figure>
+          )}
+
+          {/* Artículo */}
+          {contenido && contenido.length > 0 ? (
+            <ArticuloRico value={contenido} />
+          ) : (
+            <div className="text-lg">
+              <Parrafos texto={textoRespaldo} />
             </div>
           )}
-          <div className="text-lg">
-            <Parrafos texto={contenido} />
-          </div>
+
+          {/* Fuentes */}
+          {fuentes && (
+            <div className="mt-14 border-t border-tinta/10 pt-5">
+              <p className="text-xs font-semibold uppercase tracking-wide text-secundario/70">
+                {en ? "Sources" : "Fuentes"}
+              </p>
+              <p className="mt-1 text-sm text-secundario/80">{fuentes}</p>
+            </div>
+          )}
         </div>
       </Container>
     </>
