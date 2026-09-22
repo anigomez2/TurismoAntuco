@@ -117,7 +117,6 @@ export const prestador = defineType({
       type: "array",
       group: "fotos",
       of: [{ type: "fotoConAlt" }],
-      options: { layout: "grid" },
     }),
     defineField({
       name: "ubicacion",

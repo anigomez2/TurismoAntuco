@@ -64,7 +64,6 @@ export const ficha = defineType({
       title: "Fotos",
       type: "array",
       of: [{ type: "fotoConAlt" }],
-      options: { layout: "grid" },
     }),
     defineField({
       name: "ubicacion",

@@ -24,7 +24,6 @@ export const configuracion = defineType({
       type: "array",
       group: "portada",
       of: [{ type: "fotoConAlt" }],
-      options: { layout: "grid" },
     }),
     defineField({
       name: "fotoPortada",

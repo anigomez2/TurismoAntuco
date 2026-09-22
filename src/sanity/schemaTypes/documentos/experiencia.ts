@@ -77,7 +77,6 @@ export const experiencia = defineType({
       type: "array",
       group: "basico",
       of: [{ type: "fotoConAlt" }],
-      options: { layout: "grid" },
     }),
     defineField({
       name: "descripcion",
