@@ -17,10 +17,20 @@ export const configuracion = defineType({
   ],
   fields: [
     defineField({
-      name: "fotoPortada",
-      title: "Foto de portada (inicio)",
+      name: "fotosPortada",
+      title: "Fotos de portada (inicio)",
       description:
-        "Fotografía a pantalla completa del hero en la página de inicio. Horizontal, de buena calidad.",
+        "Fotografías del carrusel del inicio. Con una se muestra fija; con varias, se van alternando solas. Horizontales, de buena calidad. Se recomiendan de 3 a 6.",
+      type: "array",
+      group: "portada",
+      of: [{ type: "fotoConAlt" }],
+      options: { layout: "grid" },
+    }),
+    defineField({
+      name: "fotoPortada",
+      title: "Foto de portada (respaldo, opcional)",
+      description:
+        "Se usa solo si no cargaste fotos en el carrusel de arriba. Puedes ignorar este campo.",
       type: "fotoConAlt",
       group: "portada",
     }),

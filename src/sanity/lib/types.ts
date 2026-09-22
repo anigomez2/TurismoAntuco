@@ -32,6 +32,7 @@ export interface Configuracion {
   enlaceEntradasConaf?: string;
   camaraWebUrl?: string;
   tarifasEntrada?: string;
+  fotosPortada?: FotoConAlt[];
   fotoPortada?: FotoConAlt;
 }
 

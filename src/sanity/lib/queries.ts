@@ -41,7 +41,7 @@ export const configuracionQuery = groq`
   *[_type == "configuracion"][0]{
     email, telefono, whatsapp, direccionOficina, horarioOficina,
     instagram, facebook, enlaceEntradasConaf, camaraWebUrl, tarifasEntrada,
-    fotoPortada${IMG}
+    fotosPortada[]${IMG}, fotoPortada${IMG}
   }
 `;
 

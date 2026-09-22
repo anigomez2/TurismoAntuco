@@ -61,6 +61,13 @@ export default async function InicioPage({
     traer<Evento>(eventosProximosQuery, [TAGS.evento], idioma, { hoy }),
   ]);
 
+  const fotosHero =
+    config?.fotosPortada && config.fotosPortada.length > 0
+      ? config.fotosPortada
+      : config?.fotoPortada
+        ? [config.fotoPortada]
+        : [];
+
   const destacadas = experiencias.slice(0, 3);
   const alojamientos = prestadores.filter((p) => p.tipo === "alojamiento").slice(0, 3);
   const proximosEventos = eventos.slice(0, 3);
@@ -68,7 +75,7 @@ export default async function InicioPage({
   return (
     <>
       <JsonLd data={jsonLdDestino()} />
-      <Hero lang={idioma} foto={config?.fotoPortada} />
+      <Hero lang={idioma} fotos={fotosHero} />
 
       {/* Antuco en cada temporada */}
       <section className="bg-brisa/40 py-14">
