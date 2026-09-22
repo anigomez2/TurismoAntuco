@@ -66,8 +66,8 @@ export default async function HistoriaPage({
       <section className="bg-tinta text-white">
         <Container className="grid items-center gap-8 py-12 md:grid-cols-2 md:py-16">
           <div>
-            <p className="font-titulo text-sm font-semibold tracking-wide text-white/60">
-              {en ? "The geological history of Antuco" : "La historia geológica de Antuco"}
+            <p className="font-titulo text-sm font-semibold uppercase tracking-[0.2em] text-white/60">
+              {en ? "The origin of the landscape" : "El origen del paisaje"}
             </p>
             <h2 className="mt-2 text-3xl text-white sm:text-4xl">{heroTitulo}</h2>
             <div className="mt-4 text-white/85">
