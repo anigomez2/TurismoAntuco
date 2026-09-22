@@ -19,7 +19,7 @@ export async function generateMetadata({
   const { lang } = await params;
   const en = lang === "en";
   return {
-    title: en ? "The geological history of Antuco" : "La historia geológica de Antuco",
+    title: en ? "The geological history of the Antuco Volcano" : "La historia geológica del Volcán Antuco",
     description: en
       ? "How the Antuco volcano, Sierra Velluda and the collapse that dammed Laguna del Laja shaped the landscape."
       : "Cómo el volcán Antuco, la Sierra Velluda y el colapso que represó la Laguna del Laja formaron el paisaje.",
@@ -44,7 +44,7 @@ export default async function GeologiaPage({
 
   const titulo =
     (en ? historia?.heroTituloEn : historia?.heroTituloEs) ||
-    (en ? "The geological history of Antuco" : "La historia geológica de Antuco");
+    (en ? "The geological history of the Antuco Volcano" : "La historia geológica del Volcán Antuco");
   const contenido =
     (en ? historia?.heroContenidoEn : historia?.heroContenidoEs) ||
     (en ? historia?.heroTextoEn : historia?.heroTextoEs);

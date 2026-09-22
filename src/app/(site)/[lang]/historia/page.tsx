@@ -46,7 +46,7 @@ export default async function HistoriaPage({
 
   const heroTitulo =
     (en ? historia?.heroTituloEn : historia?.heroTituloEs) ||
-    (en ? "The geological history of Antuco" : "La historia geológica de Antuco");
+    (en ? "The geological history of the Antuco Volcano" : "La historia geológica del Volcán Antuco");
   const heroTexto = en ? historia?.heroTextoEn : historia?.heroTextoEs;
   const secciones = historia?.secciones ?? [];
 

@@ -29,8 +29,8 @@ export function historiaDoc() {
   return {
     _id: "historia",
     _type: "historia",
-    heroTituloEs: "La historia geológica de Antuco",
-    heroTituloEn: "The geological history of Antuco",
+    heroTituloEs: "La historia geológica del Volcán Antuco",
+    heroTituloEn: "The geological history of the Antuco Volcano",
     heroTextoEs: `El volcán Antuco (2.979 m) es un estratovolcán de composición basáltica y andesítico-basáltica, cuya actividad comenzó hace unos 130.000 años, a fines del Pleistoceno. Es uno de los volcanes más jóvenes y activos del sur de Chile.
 
 Hace aproximadamente 9.700 años, un gran colapso de su flanco generó una avalancha que bajó decenas de kilómetros por el valle del río Laja y represó su desagüe: así nació la Laguna del Laja. Ese pasado explica el paisaje que vemos hoy, con el cono casi perfecto del Antuco junto a la laguna y los campos de lava negra.`,

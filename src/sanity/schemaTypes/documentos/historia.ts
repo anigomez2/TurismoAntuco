@@ -21,7 +21,7 @@ export const historia = defineType({
       title: "Título del hero (español)",
       type: "string",
       group: "hero",
-      initialValue: "La historia geológica de Antuco",
+      initialValue: "La historia geológica del Volcán Antuco",
     }),
     defineField({ name: "heroTituloEn", title: "Título del hero (inglés)", type: "string", group: "hero" }),
     defineField({
