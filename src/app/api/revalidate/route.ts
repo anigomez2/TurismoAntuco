@@ -14,6 +14,7 @@ const TIPOS_VALIDOS = [
   "experiencia",
   "evento",
   "ficha",
+  "historia",
   "configuracion",
 ];
 

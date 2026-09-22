@@ -16,6 +16,13 @@ export const estadoQuery = groq`
   }
 `;
 
+export const historiaQuery = groq`
+  *[_type == "historia"][0]{
+    bajadaEs, bajadaEn,
+    secciones[]{ tituloEs, tituloEn, textoEs, textoEn, foto${IMG} }
+  }
+`;
+
 export const configuracionQuery = groq`
   *[_type == "configuracion"][0]{
     email, telefono, whatsapp, direccionOficina, horarioOficina,

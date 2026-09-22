@@ -67,6 +67,17 @@ export const structure: StructureResolver = (S) =>
       // 5) Fichas de la guía
       S.documentTypeListItem("ficha").title("Fichas de la guía"),
 
+      // 6) Historia y patrimonio — singleton
+      S.listItem()
+        .title("Historia y patrimonio")
+        .id("historia")
+        .child(
+          S.document()
+            .schemaType("historia")
+            .documentId("historia")
+            .title("Historia y patrimonio")
+        ),
+
       S.divider(),
 
       // 6) Configuración — singleton

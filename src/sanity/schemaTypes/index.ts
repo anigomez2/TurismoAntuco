@@ -7,6 +7,7 @@ import { experiencia } from "./documentos/experiencia";
 import { prestador } from "./documentos/prestador";
 import { evento } from "./documentos/evento";
 import { ficha } from "./documentos/ficha";
+import { historia } from "./documentos/historia";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -18,9 +19,10 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     prestador,
     evento,
     ficha,
+    historia,
     configuracion,
   ],
 };
 
 /** Tipos que son singletons (documento único, no se crean ni borran). */
-export const SINGLETONS = ["estado", "configuracion"] as const;
+export const SINGLETONS = ["estado", "historia", "configuracion"] as const;

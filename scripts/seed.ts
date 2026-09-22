@@ -342,6 +342,40 @@ async function construirDocumentos() {
     actualizado: new Date().toISOString(),
   };
 
+  const seccionHistoria = (
+    tituloEs: string,
+    tituloEn: string,
+    textoEs: string,
+    textoEn: string
+  ) => ({ _key: randomUUID(), _type: "seccion", tituloEs, tituloEn, textoEs, textoEn });
+
+  const historia = {
+    _id: "historia",
+    _type: "historia",
+    bajadaEs: "Un siglo de vida de montaña entre el agua, las mulas y el volcán.",
+    bajadaEn: "A century of mountain life between water, mules and the volcano.",
+    secciones: [
+      seccionHistoria(
+        "Las villas hidroeléctricas (Abanico)",
+        "The hydroelectric villages (Abanico)",
+        "A comienzos del siglo XX, la central El Abanico trajo a la montaña a trabajadores y sus familias. Las villas que crecieron a su alrededor marcaron la identidad de la comuna alta, y su patrimonio construido aún se conserva junto al río Laja.",
+        "In the early 20th century, the El Abanico power plant brought workers and their families to the mountains. The villages that grew around it shaped the identity of the upper commune, and their heritage buildings still stand by the Laja river."
+      ),
+      seccionHistoria(
+        "Arrieros y la ruta pehuenche",
+        "Muleteers and the Pehuenche route",
+        "Mucho antes de los caminos, los arrieros cruzaban la cordillera por antiguas huellas pehuenches, comerciando entre el valle y el lado argentino por el Paso Pichachén. Esa cultura de montaña sigue viva en las cabalgatas y los guías locales de hoy.",
+        "Long before the roads, muleteers crossed the range along ancient Pehuenche paths, trading between the valley and the Argentine side through the Pichachén Pass."
+      ),
+      seccionHistoria(
+        "El pueblo de Antuco",
+        "The town of Antuco",
+        "Al pie del volcán, el pueblo de Antuco conserva el ritmo tranquilo de una comuna rural: su plaza, sus tradiciones y su gente, que hoy abre las puertas a quienes buscan naturaleza y calma.",
+        "At the foot of the volcano, the town of Antuco keeps the calm pace of a rural commune: its plaza, its traditions and its people."
+      ),
+    ],
+  };
+
   const configuracion = {
     _id: "configuracion",
     _type: "configuracion",
@@ -361,6 +395,7 @@ async function construirDocumentos() {
     ...eventos,
     ...fichas,
     estado,
+    historia,
     configuracion,
   ];
 }

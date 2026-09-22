@@ -34,6 +34,7 @@ export const TAGS = {
   experiencia: "experiencia",
   evento: "evento",
   ficha: "ficha",
+  historia: "historia",
   configuracion: "configuracion",
 } as const;
 

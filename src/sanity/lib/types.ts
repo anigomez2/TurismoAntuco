@@ -85,6 +85,20 @@ export interface Evento {
   enlace?: string;
 }
 
+export interface HistoriaSeccion {
+  tituloEs: string;
+  tituloEn?: string;
+  textoEs: string;
+  textoEn?: string;
+  foto?: FotoConAlt;
+}
+
+export interface Historia {
+  bajadaEs?: string;
+  bajadaEn?: string;
+  secciones?: HistoriaSeccion[];
+}
+
 export type TipoFicha = "especie" | "geositio" | "hito";
 
 export interface Ficha {
