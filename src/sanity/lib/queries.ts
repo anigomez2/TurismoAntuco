@@ -18,7 +18,8 @@ export const estadoQuery = groq`
 
 export const historiaQuery = groq`
   *[_type == "historia"][0]{
-    heroTituloEs, heroTituloEn, heroTextoEs, heroTextoEn, heroFoto${IMG},
+    heroTituloEs, heroTituloEn, heroTextoEs, heroTextoEn,
+    heroContenidoEs, heroContenidoEn, heroFoto${IMG},
     secciones[]{
       tituloEs, tituloEn, "slug": slug.current,
       resumenEs, resumenEn, contenidoEs, contenidoEn, foto${IMG}

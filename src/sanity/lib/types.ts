@@ -101,6 +101,8 @@ export interface Historia {
   heroTituloEn?: string;
   heroTextoEs?: string;
   heroTextoEn?: string;
+  heroContenidoEs?: string;
+  heroContenidoEn?: string;
   heroFoto?: FotoConAlt;
   secciones?: HistoriaSeccion[];
 }

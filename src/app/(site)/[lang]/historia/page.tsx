@@ -73,6 +73,14 @@ export default async function HistoriaPage({
             <div className="mt-4 text-white/85">
               <Parrafos texto={heroTexto} className="text-white/85" />
             </div>
+            <div className="mt-6">
+              <Boton
+                href={`${rutas(lang).historia}/geologia`}
+                className="border border-white/40 bg-transparent text-white hover:border-white"
+              >
+                {en ? "Read the full story" : "Leer la historia completa"}
+              </Boton>
+            </div>
           </div>
           <div className="overflow-hidden rounded-tarjeta">
             <SanityImage

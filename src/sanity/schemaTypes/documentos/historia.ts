@@ -32,7 +32,17 @@ export const historia = defineType({
       rows: 8,
       group: "hero",
     }),
-    defineField({ name: "heroTextoEn", title: "Historia geológica (inglés)", type: "text", rows: 8, group: "hero" }),
+    defineField({ name: "heroTextoEn", title: "Historia geológica — introducción (inglés)", type: "text", rows: 8, group: "hero" }),
+    defineField({
+      name: "heroContenidoEs",
+      title: "Historia geológica — artículo completo (español)",
+      description:
+        "Texto completo de la página dedicada a la historia geológica. Separa los párrafos con una línea en blanco.",
+      type: "text",
+      rows: 16,
+      group: "hero",
+    }),
+    defineField({ name: "heroContenidoEn", title: "Historia geológica — artículo completo (inglés)", type: "text", rows: 16, group: "hero" }),
     defineField({ name: "heroFoto", title: "Foto del hero", type: "fotoConAlt", group: "hero" }),
 
     // --- Secciones temáticas ---
